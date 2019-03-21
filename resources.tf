@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "./terraform.tfstate"
+    path = "./tfStates/terraform.tfstate"
   }
 }
 
@@ -105,6 +105,13 @@ resource "aws_lambda_function" "func" {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = "${var.bucket_name}"
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm     = "AES256"
+      }
+    }
+ }
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
