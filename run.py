@@ -2,16 +2,30 @@ import time
 
 import boto3
 import logging
+import configparser
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+cf = configparser.ConfigParser()
+cf.read('./config.ini')
+secs = cf.sections()
+
+LOG_GROUP = cf.get("AWS", "LOG_GROUP")
+LOG_STREAM = cf.get("AWS", "LOG_STREAM") 
+REGION_NAME = cf.get("AWS", "REGION_NAME") 
+AWS_ACCESS_KEY_ID = cf.get("AWS", "AWS_ACCESS_KEY_ID") 
+AWS_SECRET_ACCESS_KEY = cf.get("AWS", "AWS_SECRET_ACCESS_KEY") 
+BUECKT_NAME = cf.get("AWS", "BUECKT_NAME") 
+
+'''
 LOG_GROUP = 'group_test'
 LOG_STREAM = 'stream_test'
 REGION_NAME = 'us-east-1'
 AWS_ACCESS_KEY_ID = 'AKIAJQQRCDKIK4GQ27VA'
 AWS_SECRET_ACCESS_KEY = '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'
 BUECKT_NAME = "mybucket201903210101"
+'''
 
 logs = boto3.client('logs', 
     region_name = REGION_NAME,    
