@@ -25,17 +25,16 @@ def real_env_test():
 		Bucket= BUECKT_NAME ,
 		Key='object20190320'
 	)
-	print(s3Response)
 
 	logsClient = boto3.client('logs',    
 		region_name = REGION_NAME,
 		aws_access_key_id = AWS_ACCESS_KEY_ID,
 		aws_secret_access_key = AWS_SECRET_ACCESS_KEY)
 		
-	logsResponse = logsClient.get_log_events(
-		logGroupName='group_test',
-		logStreamName='stream_test',
+	logsResponse = logsClient.filter_log_events(
+		logGroupName='/aws/lambda/record_remove_object_on_s3'
 	)
+	print("CloudWatch Logs : Plz check Log console for further details")
 	print(logsResponse)
 
 	dynamodbClient = boto3.client('dynamodb',
@@ -46,7 +45,8 @@ def real_env_test():
 	response = dynamodbClient.scan(
 		TableName='remove_logs'
 	)
+	print("DynamoDB Records : ")
 	print(response)
 
 if __name__ == '__main__':
-    real_env_test()
+	real_env_test()
