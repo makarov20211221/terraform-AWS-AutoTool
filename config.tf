@@ -1,12 +1,12 @@
 # Configure the AWS Provider
 variable "aws_access_key" {
   type    = "string"
-  default = "AKIAJQQRCDKIK4GQ27VA"
+  default = ""
 }
 
 variable "aws_secret_key" {
   type    = "string"
-  default = "rQ5oBjviVbj7RDfrJIv7IG2gQAP+aSQv5gZoqAuC"
+  default = ""
 }
 
 variable "aws_region" {
